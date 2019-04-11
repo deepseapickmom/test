@@ -1,0 +1,153 @@
+密码学课程设计期末答辩要求：
+
+课程成绩分为现场答辩和实验报告两部分，其中现场答辩成绩占期末成绩 的85%，实验报告成绩占期末成绩的15%。
+
+答辩时间：
+	第六周到第八周
+		周一：10：00-11：20 
+		周三：10：00-16：30
+		周五：13：00-16：30	
+其它时间只要我在办公室也可以，截止时间，第八周周五16：30
+
+答辩题型如下：
+
+一、代码题
+要求清楚大作业中每一行代码的含义（WindowBuilder自动生成的GUI代码除外）。
+代码题分为A,B,C三个难度
+A类题最高分100分，删掉某行或某几行关键代码后现场补全
+B类题最高分85分，指定一项功能，找出实现该功能的代码在哪行
+C类题最高分70分，指定一行或一段代码，说明它们的实现的功能
+答辩之前要求删除代码中的所有注释（Eclipse删除注释的方法请自行百度）
+
+二、操作题
+操作题要求限时完成，中间不能停顿
+1、Eclipse打开代码自动完成功能
+2、创建Gralde项目并在项目中引入Bouncy Castle  Provider库或Bouncy Castle pkix库
+3、安装WindowBuilder插件
+4、创建WindowBuilder项目
+5、使用keytool命令管理密钥库，创建对称密钥，公私钥对，导入导出证书，列出密钥库中的内容
+6、为代码自动生成try catch语句
+7、阅读Bouncy Castle和JAVA标准库中的源代码
+8、任意指定一个JAVA第三方库，将其安装在Eclipse项目中
+
+三、概念题
+1、与大作业相关的所有密码学概念，包括但不限于HASH算法、分组密码、流密码，分组密码运行模式，公钥密码，RSA密码参数，RSA算法流程，ElGamal密钥参数，ElGamal算法流程，椭圆曲线密钥参数，ECIES流程，数字签名，数字证书
+2、课程中涉及的关键类或接口的作用和主要方法的用法，包括但不限于MessageDigest、Cipher、IvParameterSpec、Hex、FileInputStream、FileOutputStream、CipherInputStream、CipherOutputStream、DigestInputStream、DigestOutputStream、Key、Secretkey、SecretKeySpec、KeyPairGenerator、KeyPair、PublicKey、PrivateKey、RSAPublicKey、RSAPrivateKey、KeyStore、SecureRandom、Signature、Certificate、X509Certificate等等
+请自行查看JDK API手册，搞清楚以上类或接口所在的包，它们之类的关系（比如PublicKey接口是Key接口的子接口，或RSAPublicKey接口是PublicKey接口的子接口），它们的作用，它们的主要方法（仅限于在大作业中用到的方法）
+3、对称密码算法常用的填充方案
+4、公钥密码算法常用的填充方案
+
+
+
+CREATE TABLE s(
+sno VARCHAR2(10) not null PRIMARY KEY,
+sname VARCHAR2(10) not null,
+status number(3) not null,
+city varchar2(10)
+)
+create table p(
+pno VARCHAR2(5) not null PRIMARY key,
+pname VARCHAR2(6) not null,
+color VARCHAR2(6) not null,
+weight number(4) not null
+)
+create table j(
+jno VARCHAR2(5) not null primary key,
+jname VARCHAR2(4) not null,
+city VARCHAR2(6) not null
+)
+create table spj(
+sno VARCHAR2(10) not null ,
+pno varchar2(5) not null,
+jno VARCHAR2(5) not null ,
+qty number(4) not null
+
+)
+alter table spj add primary key(sno,pno,jno);
+alter table spj add CONSTRAINT FK_SNO FOREIGN key(sno) REFERENCES s(sno);
+alter table spj add CONSTRAINT FK_PNO FOREIGN key(pno) REFERENCES p(pno);
+alter table spj add CONSTRAINT FK_JNO FOREIGN key(jno) REFERENCES j(jno);
+
+insert into  S values('S1','精益',20,'天津');
+insert into  S values('S2','盛锡',10,'北京');
+insert into  S values('S3','东方红',30,'北京');
+insert into  S values('S4','丰泰盛',20,'天津');
+insert into  S values('S5','为民',30,'上海');
+
+insert into  p values('p1','螺母','红',12);
+insert into  p values('p2','螺栓','绿',17);
+insert into  p values('p3','螺丝刀','蓝',14);
+insert into  p values('p4','螺丝刀','红',14);
+insert into  p values('p5','凸轮','蓝',40);
+insert into  p values('p6','齿轮','红',30);
+
+insert into  j values('j1','三建','北京');
+insert into  j values('j2','一汽','长春');
+insert into  j values('j3','弹簧厂','天津');
+insert into  j values('j4','造船厂','天津');
+insert into  j values('j5','机车厂','唐山');
+insert into  j values('j6','无线电厂','常州');
+insert into  j values('j7','半导体厂','难进');
+
+
+
+alter table j MODIFY jname varchar2(15);
+
+
+insert into spj values('S1','p1','j1',200);
+insert into spj values('S1','p1','j3',100);
+insert into spj values('S1','p1','j4',700);
+insert into spj values('S1','p2','j1',100);
+insert into spj values('S2','p3','j1',400);
+insert into spj values('S2','p2','j4',200);
+insert into spj values('S2','p3','j4',500);
+insert into spj values('S2','p3','j5',400);
+insert into spj values('S2','p5','j1',400);
+insert into spj values('S2','p5','j2',100);
+insert into spj values('S3','p1','j1',200);
+insert into spj values('S3','p3','j1',200);
+insert into spj values('S4','p2','j1',100);
+insert into spj values('S4','p2','j3',300);
+insert into spj values('S4','p6','j4',200);
+insert into spj values('S5','p2','j4',100);
+insert into spj values('S5','p3','j1',200);
+insert into spj values('S5','p6','j2',200);
+insert into spj values('S5','p6','j4',500);
+
+
+
+
+select SNO from spj  where jno='j1';
+select sno from spj where jno='j1' and pno='p1';
+select sno from spj,p where spj.PNO=p.PNO and jno='j1' and color='红';
+select jno from j where not exists (select * from spj,s,p where  spj.JNO=J.JNO and  spj.SNO=s.SNO and p.PNO=spj.PNO and p.COLOR='红' and S.CITY='天津');
+select DISTINCT JNO from SPJ z where not exists(select * from spj x where sno='S1' and not exists(select * from spj y where y.pno=x.pno and y.jno=z.jno));
+
+
+
+select sname,city from s;
+select pname,color, weight from p;
+
+select distinct jno from spj where sno='S1';
+select pno,qty from spj where jno='j2';
+select pno from spj,s where s.sno=spj.SNO and s.city='上海';
+select jname from spj,s,j where spj.jno=j.jno and s.sno=spj.sno and s.city='上海';
+select distinct jno from j where not exists(select * from spj where j.jno=spj.jno and sno in(select sno from s where s.city='天津'));
+select sno, sum(qty) from spj GROUP by sno;
+
+update p set color='蓝' where color='红';
+
+update j set city='上海' where jno='j3';
+update spj set sno='S3' where sno='S5' and jno='j4' and pno='p6';
+
+delete  from spj where sno='S2';
+delete  from s where sno='S2';
+
+
+select spj.sno,sname,spj.pno,pname,spj.jno,jname,qty from spj,j,p,s where SPJ.jno=j.jno and spj.sno=s.sno and spj.pno=p.pno ;
+update sc set crade=0;
+
+
+delete from sc where sno='95002';
+delete from student where sno='95002';
+
